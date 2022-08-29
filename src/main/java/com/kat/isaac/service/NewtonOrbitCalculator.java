@@ -1,7 +1,8 @@
-package com.kat.isaac.isaac.service;
+package com.kat.isaac.service;
 
 
-import com.kat.isaac.isaac.model.Planet;
+import com.kat.isaac.model.Planet;
+import com.kat.isaac.model.Vector;
 
 public class NewtonOrbitCalculator implements OrbitCalculator {
 
@@ -32,5 +33,21 @@ public class NewtonOrbitCalculator implements OrbitCalculator {
     @Override
     public double period(double semiAxis, Planet planet) {
         return 0;
+    }
+
+    @Override
+    public double specificMechanicalEnergy(Vector r, Vector v, Planet planet) {
+
+        return v.dotProduct(v) /2 - planet.standardGravitationalParameter() / r.modulus();
+    }
+
+    @Override
+    public double specificAngularMomentum(Vector r, Vector v) {
+        return r.crossProduct(v).modulus();
+    }
+
+    @Override
+    public double flightPathAngle(Vector r, Vector v) {
+        return Math.acos(specificAngularMomentum(r, v) / (r.modulus() * v.modulus()));
     }
 }
