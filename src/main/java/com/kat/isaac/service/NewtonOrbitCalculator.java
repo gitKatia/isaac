@@ -26,8 +26,8 @@ public class NewtonOrbitCalculator implements OrbitCalculator {
     }
 
     @Override
-    public double escapeVelocity(Planet planet) {
-        return 0;
+    public double escapeVelocity(Planet planet, double r) {
+        return Math.sqrt(2 * planet.standardGravitationalParameter() /r);
     }
 
     @Override
@@ -37,7 +37,6 @@ public class NewtonOrbitCalculator implements OrbitCalculator {
 
     @Override
     public double specificMechanicalEnergy(Vector r, Vector v, Planet planet) {
-
         return v.dotProduct(v) /2 - planet.standardGravitationalParameter() / r.modulus();
     }
 
@@ -49,5 +48,10 @@ public class NewtonOrbitCalculator implements OrbitCalculator {
     @Override
     public double flightPathAngle(Vector r, Vector v) {
         return Math.acos(specificAngularMomentum(r, v) / (r.modulus() * v.modulus()));
+    }
+
+    @Override
+    public double period(Planet planet, double semiAxis) {
+        return 2 * Math.PI/Math.sqrt(planet.standardGravitationalParameter()) * Math.sqrt(Math.pow(semiAxis, 3));
     }
 }
