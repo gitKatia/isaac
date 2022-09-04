@@ -79,7 +79,7 @@ public final class OrbitsUtil {
 
     public static Double apoApsVelocity(Double apoApsRadius, Double specificMechanicalEnergy, Double standardGravitationalParameter,
                                         String orbitType) {
-        if ("PARABOLA".equals(orbitType)) {
+        if (PARABOLA_CONIC_TYPE.equals(orbitType)) {
             return 0.0;
         }
         if (HYPERBOLA_CONIC_TYPE.equals(orbitType)) {
@@ -114,6 +114,10 @@ public final class OrbitsUtil {
         double cosZenith = r.dotProduct(v) / (r.modulus() * v.modulus());
         double sinFlightPathAngle = cosZenith;
         return Math.asin(sinFlightPathAngle);
+    }
+
+    public static Double specificMechanicalEnergy(Double radius, Double velocity, Double standardGravitationalParameter) {
+        return Math.pow(velocity, 2) / 2 - standardGravitationalParameter / radius;
     }
 }
 

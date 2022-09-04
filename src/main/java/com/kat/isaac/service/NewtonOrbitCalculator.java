@@ -136,4 +136,32 @@ public class NewtonOrbitCalculator implements OrbitCalculator {
                 .period(period(semiAxis, standardGravitationalParameter, orbitType))
                 .build();
     }
+
+    @Override
+    public Orbit orbitFromParameterAndVelocityAtParameter(Double parameter, Double velocity, CentralBody centralBody) {
+        Double standardGravitationalParameter = centralBody.getStandardGravitationalParameter();
+        Double meanEquatorialRadius = centralBody.getMeanEquatorialRadius();
+        Double specificMechanicalEnergy = specificMechanicalEnergy(parameter, velocity, standardGravitationalParameter);
+        String orbitType = orbitType(specificMechanicalEnergy);
+        Double semiAxis = semiAxis(specificMechanicalEnergy, standardGravitationalParameter);
+        Double eccentricity = eccentricity(parameter, semiAxis, orbitType);
+        Double periApsRadius = periApsRadius(parameter, eccentricity);
+        Double apoApsRadius = apoApsRadius(parameter, eccentricity, orbitType);
+        return Orbit.builder()
+                .eccentricity(eccentricity)
+                .parameter(parameter)
+                .periApsRadius(periApsRadius)
+                .apoApsRadius(apoApsRadius)
+                .periApsHeight(periApsRadius - meanEquatorialRadius)
+                .apoApsHeight(apoApsHeight(apoApsRadius, meanEquatorialRadius, orbitType))
+                .apoApsVelocity(apoApsVelocity(apoApsRadius, specificMechanicalEnergy, standardGravitationalParameter, orbitType))
+                .periApsVelocity(periApsVelocity(periApsRadius, specificMechanicalEnergy, standardGravitationalParameter))
+                .semiAxis(semiAxis)
+                .standardGravitationalParameter(standardGravitationalParameter)
+                .specificMechanicalEnergy(specificMechanicalEnergy)
+                .orbitType(orbitType)
+                .specificAngularMomentum(specificAngularMomentum(parameter, standardGravitationalParameter))
+                .period(period(semiAxis, standardGravitationalParameter, orbitType))
+                .build();
+    }
 }
