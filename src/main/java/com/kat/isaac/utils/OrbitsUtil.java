@@ -1,5 +1,7 @@
 package com.kat.isaac.utils;
 
+import com.kat.isaac.model.Vector;
+
 public final class OrbitsUtil {
 
     private OrbitsUtil() {
@@ -105,4 +107,12 @@ public final class OrbitsUtil {
     public static Double periApsHeight(Double periApsRadius, Double meanEquatorialRadius) {
         return periApsRadius != null ? periApsRadius - meanEquatorialRadius : null;
     }
+
+    public static double flightPathAngle(Vector r, Vector v) {
+        double cosZenith = r.dotProduct(v) / (r.modulus() * v.modulus());
+        double sinFlightPathAngle = cosZenith;
+        return Math.asin(sinFlightPathAngle);
+    }
 }
+
+

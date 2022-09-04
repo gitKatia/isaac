@@ -1,5 +1,7 @@
 package com.kat.isaac.service;
 
+import com.kat.isaac.service.interfaces.VelocityCalculator;
+
 public class NewtonVelocityCalculator  implements VelocityCalculator {
 
     @Override

@@ -8,21 +8,21 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Builder
 public class Vector {
-    private final Double x;
-    private final Double y;
-    private final Double z;
+    private final double x;
+    private final double y;
+    private final double z;
 
-    public double dotProduct(Vector other) {
-        Double xNew = this.x * other.x;
-        Double yNew = this.y * other.y;
-        Double zNew = this.z * other.z;
+    public Double dotProduct(Vector other) {
+        double xNew = this.x * other.x;
+        double yNew = this.y * other.y;
+        double zNew = this.z * other.z;
         return xNew + yNew + zNew;
     }
 
-    public Vector multiply(Double factor) {
-        Double xNew = this.x * factor;
-        Double yNew = this.y * factor;
-        Double zNew = this.z * factor;
+    public Vector multiply(double factor) {
+        double xNew = this.x * factor;
+        double yNew = this.y * factor;
+        double zNew = this.z * factor;
         return new Vector(xNew, yNew, zNew);
     }
 
