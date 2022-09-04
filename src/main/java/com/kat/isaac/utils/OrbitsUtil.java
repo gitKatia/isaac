@@ -2,6 +2,8 @@ package com.kat.isaac.utils;
 
 import com.kat.isaac.model.Vector;
 
+import static com.kat.isaac.AppConstants.*;
+
 public final class OrbitsUtil {
 
     private OrbitsUtil() {
@@ -10,17 +12,17 @@ public final class OrbitsUtil {
     public static String orbitType(Double specificMechanicalEnergy) {
         double zero = Math.pow(10, - 5);
         if (Math.abs(specificMechanicalEnergy) < zero) {
-            return "PARABOLA";
+            return PARABOLA_CONIC_TYPE;
         }
-        return specificMechanicalEnergy > 0 ? "HYPERBOLA" : "ELLIPSE";
+        return specificMechanicalEnergy > 0 ? HYPERBOLA_CONIC_TYPE : ELLIPSE_CONIC_TYPE;
     }
 
     public static String orbitTypeFromEccentricity(Double eccentricity) {
         double zero = Math.pow(10, - 5);
         if (Math.abs(eccentricity) < (1.0 + zero) && Math.abs(eccentricity) > (1.0 - zero)) {
-            return "PARABOLA";
+            return PARABOLA_CONIC_TYPE;
         }
-        return eccentricity > 1 ? "HYPERBOLA" : "ELLIPSE";
+        return eccentricity > 1 ? HYPERBOLA_CONIC_TYPE : ELLIPSE_CONIC_TYPE;
     }
 
     public static Double semiAxis(Double specificMechanicalEnergy, Double standardGravitationalParameter) {
@@ -32,14 +34,14 @@ public final class OrbitsUtil {
     }
 
     public static Double semiAxis(Double periApsRadius, Double eccentricity, String orbitType) {
-        if (! "ELLIPSE".equals(orbitType)) {
+        if (! ELLIPSE_CONIC_TYPE.equals(orbitType)) {
             return Double.POSITIVE_INFINITY;
         }
         return periApsRadius / (1 - eccentricity);
     }
 
     public static Double parameter(Double semiAxis, Double eccentricity, String orbitType) {
-        if ("PARABOLA".equals(orbitType)) {
+        if (PARABOLA_CONIC_TYPE.equals(orbitType)) {
             return null;
         }
         return semiAxis * (1 - Math.pow(eccentricity, 2));
@@ -50,14 +52,14 @@ public final class OrbitsUtil {
     }
 
     public static Double eccentricity(Double parameter, Double semiAxis, String orbitType) {
-        if ("PARABOLA".equals(orbitType)) {
+        if (PARABOLA_CONIC_TYPE.equals(orbitType)) {
             return 1.0;
         }
         return Math.sqrt(1 - parameter/semiAxis);
     }
 
     public static Double apoApsRadius(Double parameter, Double eccentricity, String orbitType) {
-        if (! "ELLIPSE".equals(orbitType)) {
+        if (! ELLIPSE_CONIC_TYPE.equals(orbitType)) {
             return Double.POSITIVE_INFINITY;
         }
         return parameter / (1 - eccentricity);
@@ -68,7 +70,7 @@ public final class OrbitsUtil {
     }
 
     public static Double apoApsRadiusFromSemiAxis(Double semiAxis, Double eccentricity, String orbitType) {
-        if (! "ELLIPSE".equals(orbitType)) {
+        if (! ELLIPSE_CONIC_TYPE.equals(orbitType)) {
             return Double.POSITIVE_INFINITY;
         }
 
@@ -80,7 +82,7 @@ public final class OrbitsUtil {
         if ("PARABOLA".equals(orbitType)) {
             return 0.0;
         }
-        if ("HYPERBOLA".equals(orbitType)) {
+        if (HYPERBOLA_CONIC_TYPE.equals(orbitType)) {
             return Math.sqrt(2 * specificMechanicalEnergy);
         }
         return Math.sqrt(2 * (specificMechanicalEnergy  + standardGravitationalParameter / apoApsRadius));
@@ -91,14 +93,14 @@ public final class OrbitsUtil {
     }
 
     public static Double period(Double semiAxis, Double standardGravitationalParameter, String orbitType) {
-        if (! "ELLIPSE".equals(orbitType)) {
+        if (! ELLIPSE_CONIC_TYPE.equals(orbitType)) {
             return Double.POSITIVE_INFINITY;
         }
         return 2 * Math.PI/Math.sqrt(standardGravitationalParameter) * Math.sqrt(Math.pow(semiAxis, 3));
     }
 
     public static Double apoApsHeight(Double apoApsRadius, Double meanEquatorialRadius, String orbitType) {
-        if (! "ELLIPSE".equals(orbitType)) {
+        if (! ELLIPSE_CONIC_TYPE.equals(orbitType)) {
             return Double.POSITIVE_INFINITY;
         }
         return apoApsRadius != null ? apoApsRadius - meanEquatorialRadius : null;
