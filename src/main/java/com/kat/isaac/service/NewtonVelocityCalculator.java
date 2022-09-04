@@ -23,4 +23,9 @@ public class NewtonVelocityCalculator  implements VelocityCalculator {
     public double escapeVelocity(double radius, double standardGravitationalParameter) {
         return Math.sqrt(2 * standardGravitationalParameter / radius);
     }
+
+    @Override
+    public double velocity(double radius, double specificMechanicalEnergy, double standardGravitationalParameter) {
+        return Math.sqrt(2 * (specificMechanicalEnergy + standardGravitationalParameter / radius));
+    }
 }

@@ -94,4 +94,31 @@ public class NewtonOrbitCalculatorTest {
         assertDouble( "54414616051%s38", result.getSpecificAngularMomentum());
         assertDouble( "1870081%s11", result.getApoApsHeight());
     }
+
+    @DisplayName("orbit() given height, velocity and flightPathAngle")
+    @Test
+    void orbit_GivenHeightVelocityAndFlightPathAngle() {
+
+        // Given
+        CentralBody centralBody = CentralBody.builder()
+                .name(PLANET_EARTH_NAME)
+                .standardGravitationalParameter(standardGravitationalParameter(PLANET_EARTH_MASS))
+                .meanEquatorialRadius(EARTH_MEAN_EQUATORIAL_RADIUS)
+                .build();
+        Double height = 10462840 * FT_IN_METERS;
+        Double velocity = 25936.25 * FT_IN_METERS;
+        Double flightPathAngle = 0d;
+
+        // When
+        Orbit result = newtonOrbitCalculator.orbit(height, velocity, flightPathAngle, centralBody);
+
+        // Then
+        assertDouble( "-10443388%s01", result.getSpecificMechanicalEnergy());
+        assertEquals("ELLIPSE", result.getOrbitType());
+        assertDouble( "75632551697%s02", result.getSpecificAngularMomentum());
+        assertDouble( "14341364%s96", result.getParameter());
+        assertDouble( "0%s5", result.getEccentricity());
+        assertDouble( "9567238%s63", result.getPeriApsRadius());
+        assertDouble( "28625922%s4", result.getApoApsRadius());
+    }
 }
