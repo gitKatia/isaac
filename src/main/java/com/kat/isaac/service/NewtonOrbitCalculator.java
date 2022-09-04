@@ -4,6 +4,7 @@ package com.kat.isaac.service;
 import com.kat.isaac.model.CentralBody;
 import com.kat.isaac.model.Orbit;
 import com.kat.isaac.model.Vector;
+import com.kat.isaac.service.interfaces.OrbitCalculator;
 
 import static com.kat.isaac.utils.OrbitsUtil.*;
 
@@ -42,7 +43,7 @@ public class NewtonOrbitCalculator implements OrbitCalculator {
     }
 
     @Override
-    public Orbit orbit2(Double specificMechanicalEnergy, Double eccentricity, CentralBody centralBody) {
+    public Orbit orbit(CentralBody centralBody, Double specificMechanicalEnergy, Double eccentricity) {
         Double standardGravitationalParameter = centralBody.getStandardGravitationalParameter();
         Double meanEquatorialRadius = centralBody.getMeanEquatorialRadius();
         Double semiAxis = semiAxis(specificMechanicalEnergy, standardGravitationalParameter);

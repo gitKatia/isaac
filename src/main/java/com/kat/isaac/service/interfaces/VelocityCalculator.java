@@ -1,4 +1,4 @@
-package com.kat.isaac.service;
+package com.kat.isaac.service.interfaces;
 
 public interface VelocityCalculator {
     double circularOrbitVelocity(double semiAxis, double standardGravitationalParameter);
