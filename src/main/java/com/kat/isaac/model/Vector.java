@@ -8,9 +8,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Builder
 public class Vector {
-    private final double x;
-    private final double y;
-    private final double z;
+    private final Double x;
+    private final Double y;
+    private final Double z;
 
     public double dotProduct(Vector other) {
         Double xNew = this.x * other.x;
@@ -19,7 +19,7 @@ public class Vector {
         return xNew + yNew + zNew;
     }
 
-    public Vector multiply(double factor) {
+    public Vector multiply(Double factor) {
         Double xNew = this.x * factor;
         Double yNew = this.y * factor;
         Double zNew = this.z * factor;
@@ -33,7 +33,7 @@ public class Vector {
         return new Vector(xNew, yNew, zNew);
     }
 
-    public double modulus() {
+    public Double modulus() {
         return Math.sqrt(this.dotProduct(this));
     }
 }

@@ -65,9 +65,9 @@ class VectorTest {
 
         // Given
         Vector vector = Vector.builder()
-                .x(2)
-                .y(2)
-                .z(1)
+                .x(2d)
+                .y(2d)
+                .z(1d)
                 .build();
 
         // Then
@@ -80,11 +80,11 @@ class VectorTest {
 
         // Given
         Vector vector1 = Vector.builder()
-                .x(2)
-                .y(2)
+                .x(2d)
+                .y(2d)
                 .build();
         Vector vector2 = Vector.builder()
-                .z(3)
+                .z(3d)
                 .build();
 
         // Then
@@ -97,14 +97,14 @@ class VectorTest {
 
         // Given
         Vector vector1 = Vector.builder()
-                .x(2)
-                .y(2)
-                .z(3)
+                .x(2d)
+                .y(2d)
+                .z(3d)
                 .build();
         Vector vector2 = Vector.builder()
-                .x(4)
-                .y(4)
-                .z(6)
+                .x(4d)
+                .y(4d)
+                .z(6d)
                 .build();
 
         // Then
@@ -117,14 +117,14 @@ class VectorTest {
 
         // Given
         Vector vector1 = Vector.builder()
-                .x(2)
-                .y(2)
-                .z(3)
+                .x(2d)
+                .y(2d)
+                .z(3d)
                 .build();
         Vector vector2 = Vector.builder()
-                .x(4)
-                .y(4)
-                .z(6)
+                .x(4d)
+                .y(4d)
+                .z(6d)
                 .build();
 
         // Then
@@ -137,13 +137,13 @@ class VectorTest {
 
         // Given
         Vector vector1 = Vector.builder()
-                .x(2)
+                .x(2d)
                 .build();
         Vector vector2 = Vector.builder()
-                .z(2)
+                .z(2d)
                 .build();
 
         // Then
-        assertEquals(Vector.builder().y(-4). build(), vector1.crossProduct(vector2));
+        assertEquals(Vector.builder().y(-4d). build(), vector1.crossProduct(vector2));
     }
 }

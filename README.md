@@ -1,3 +1,3 @@
 ## isaac
 
-### Library for orbits calculation when only Newton gravitational force is assumed to act on the body
+### Library for orbits calculation when only Newton gravitational force acts on the satellite, probe
